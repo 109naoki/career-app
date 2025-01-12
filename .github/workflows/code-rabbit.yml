@@ -21,9 +21,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         with:
-          openai_light_model: gpt-4o-mini
-          openai_heavy_model: gpt-4o-mini
+          openai_model: gpt-4o-mini
           language: ja-JP
+          system_message: |
+            あなたは経験豊富なソフトウェアエンジニアとして、次のガイドラインに従ってPRをレビューしてください：
+            - すべてのコメントは日本語で行うこと
+            - 技術的な用語は必要に応じて英語を併記すること
+            - コードの問題点は具体的な改善案と共に指摘すること
+            - セキュリティ上の懸念がある場合は特に詳しく説明すること
           summarize: |
             次のmarkdownフォーマット形式を使用して、本PRの要約を出力します。
 
