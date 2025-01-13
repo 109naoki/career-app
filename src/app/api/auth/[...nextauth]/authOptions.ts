@@ -25,7 +25,7 @@ export const authOptions: NextAuthOptions = {
             email: credentials.email,
           },
         });
-
+    
         if (!user || !user.password) {
           throw new Error("ユーザーが見つかりません");
         }
@@ -34,9 +34,10 @@ export const authOptions: NextAuthOptions = {
           credentials.password,
           user.password
         );
-
+        
         if (!isValid) {
           throw new Error("パスワードが正しくありません");
+
         }
 
         // JWTトークンの生成
@@ -61,13 +62,10 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
-    // maxAge: 14 * 24 * 60 * 60,
-    // 5分にして
-    maxAge: 5 * 60,
+    maxAge: 14 * 24 * 60 * 60,
   },
   jwt: {
-    // maxAge: 14 * 24 * 60 * 60, // 14日
-    maxAge: 5 * 60,
+    maxAge: 14 * 24 * 60 * 60, // 14日
     secret: process.env.NEXTAUTH_SECRET,
   },
   pages: {
