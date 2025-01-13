@@ -14,10 +14,48 @@ enum Role {
 
 model User {
   id            String    @id @default(cuid())
-  age           Int?
   name          String
   email         String    @unique
   emailVerified DateTime?
   password      String
   role          Role      @default(USER)
+}
+
+model Category {
+  id        Int               @id @default(autoincrement())
+  name      String
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  postings  PostingCategory[]
+}
+
+model Posting {
+  id          String            @id @default(uuid())
+  serviceName String
+  description String
+  categories  PostingCategory[]
+  viewCounts  ViewCount[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+model PostingCategory {
+  posting    Posting  @relation(fields: [postingId], references: [id], onDelete: Cascade)
+  postingId  String
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+  @@id([postingId, categoryId])
+  @@index([categoryId])
+  @@index([postingId])
+}
+
+model ViewCount {
+  id        Int      @id @default(autoincrement())
+  posting   Posting  @relation(fields: [postingId], references: [id], onDelete: Cascade)
+  postingId String
+  count     Int      @default(0)
+  viewedAt  DateTime @default(now())
+
+  @@index([postingId, viewedAt])
 }
