@@ -26,7 +26,7 @@ export default function Page() {
       if (result?.error) {
         setError("メールアドレスまたはパスワードが正しくありません");
       } else {
-        router.push("/admin"); // ログイン後のリダイレクト先
+        router.push("/dashboard");
       }
     } catch (error) {
       console.error(error);
