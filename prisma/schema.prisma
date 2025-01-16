@@ -59,3 +59,9 @@ model ViewCount {
 
   @@index([postingId, viewedAt])
 }
+
+model Insert {
+  id        Int      @id @default(autoincrement())
+  text      String
+  createdAt DateTime @default(now())
+}
