@@ -33,6 +33,7 @@ model Posting {
   id          String            @id @default(uuid())
   serviceName String
   description String
+  isActive    Boolean           @default(false)
   categories  PostingCategory[]
   viewCounts  ViewCount[]
   createdAt   DateTime          @default(now())
