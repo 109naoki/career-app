@@ -6,11 +6,11 @@ export default async function Page() {
   const session = await getServerSession(authOptions);
 
   if (!session || session.user.role !== Role.ADMIN) {
-    redirect("/login");
+    await redirect("/login");
   }
   const response = await fetch(`${process.env.API_URL}/api/admin/posting`, {
     headers: {
-      Authorization: `Bearer ${session.token}`,
+      Authorization: `Bearer ${session!.token}`,
       "Content-Type": "application/json",
     },
   });
