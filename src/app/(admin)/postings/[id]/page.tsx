@@ -6,17 +6,16 @@ import { Form } from "./Form";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
-
+  const { id } = await params;
   if (!session) {
     return redirect("/login");
   }
 
-  // 投稿データを取得
   const posting = await prisma.posting.findUnique({
-    where: { id: params.id },
+    where: { id },
   });
 
-  if (!posting) {
+  if (!posting || !id) {
     return <div className="text-gray-500">404 Not Found</div>;
   }
 
@@ -27,7 +26,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       </h2>
       <p className="text-lg text-gray-700">{posting.description}</p>
 
-      <Form token={session.token} id={params.id} />
+      <Form token={session.token} id={id} />
     </div>
   );
 }
