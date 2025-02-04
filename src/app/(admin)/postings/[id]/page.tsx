@@ -4,9 +4,13 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { Form } from "./Form";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const session = await getServerSession(authOptions);
-  const { id } = params;
+  const { id } = await params;
   if (!session) {
     return redirect("/login");
   }
