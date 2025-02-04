@@ -2,12 +2,12 @@ import { NextResponse } from "next/server";
 
 import { prisma } from "@/app/lib/prisma";
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
 
-
+  const {id} = await params;
 
   const posting = await prisma.posting.findFirstOrThrow({
-    where: { id: params.id },
+    where: { id },
   });
 
   if (!posting) {
@@ -18,8 +18,9 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 }
 
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-  if (!params.id) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }>  }) {
+  const {id} = await params;
+  if (!id) {
     return NextResponse.json(
       { error: "Bad Request" },
       { status: 400 }
@@ -28,7 +29,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
   try {
     const posting = await prisma.posting.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!posting) {
