@@ -6,7 +6,7 @@ import { Form } from "./Form";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
-  const { id } = await params;
+  const { id } = params;
   if (!session) {
     return redirect("/login");
   }
