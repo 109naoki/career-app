@@ -1,10 +1,11 @@
-// app/postings/[id]/page.tsx
 import { prisma } from "@/app/lib/prisma";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { DeleteButton } from "./DeleteButton";
-
-export default async function Page({ params }: { params: { id: string } }) {
+type Props = {
+  params: Promise<{ id: string }>;
+};
+export default async function Page({ params }: Props) {
   const { id } = await params;
 
   const [posting, categories] = await Promise.all([
