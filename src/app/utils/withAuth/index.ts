@@ -28,7 +28,7 @@ export function withAuth(handler: ApiHandler) {
 
       const token = authHeader.split(' ')[1];
       const secret = new TextEncoder().encode(process.env.NEXTAUTH_SECRET!);
-        console.log(token);
+
       const { payload } = await jwtVerify(token, secret);
 
       if (payload.role !== 'ADMIN') {
