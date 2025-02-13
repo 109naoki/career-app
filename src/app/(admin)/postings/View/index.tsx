@@ -1,34 +1,24 @@
+// app/components/View.tsx
 "use client";
 import { FC } from "react";
 import Link from "next/link";
 import { formatDate } from "@/app/utils/formatDate";
-import { usePostings } from "@/app/hooks/usePostings";
-import Skeleton from "react-loading-skeleton";
+import { PostingWithCategories, usePostings } from "@/app/hooks/usePostings";
 import "react-loading-skeleton/dist/skeleton.css";
 import { TableHeader } from "./TableHeader";
-
-const SkeletonRow = () => (
-  <div className="grid grid-cols-[2fr_3fr_1fr_1fr_1fr] border-t p-3">
-    <div>
-      <Skeleton width="75%" height={24} />
-    </div>
-    <div>
-      <Skeleton width="80%" height={24} />
-    </div>
-    <div>
-      <Skeleton width={64} height={24} />
-    </div>
-    <div>
-      <Skeleton width={96} height={24} />
-    </div>
-    <div>
-      <Skeleton width={96} height={24} />
-    </div>
-  </div>
-);
+import { SkeletonRow } from "./SkeletonRow";
+import { Pagination } from "./Pagination";
 
 export const View: FC = () => {
-  const { data, isLoading, searchTerm, setSearchTerm } = usePostings();
+  const {
+    data,
+    metadata,
+    isLoading,
+    searchTerm,
+    setSearchTerm,
+
+    setCurrentPage,
+  } = usePostings();
 
   const renderContent = () => {
     if (isLoading) {
@@ -48,10 +38,10 @@ export const View: FC = () => {
       );
     }
 
-    return data.map((posting) => (
+    return data.map((posting: PostingWithCategories) => (
       <div
         key={posting.id}
-        className="grid grid-cols-[2fr_3fr_1fr_1fr_1fr] border-t p-3 text-gray-700"
+        className="grid grid-cols-[2fr_3fr_1fr_1fr_1fr_1fr] border-t p-3 text-gray-700"
       >
         <span className="truncate">
           <Link
@@ -66,6 +56,17 @@ export const View: FC = () => {
           {posting.description.length > 30
             ? `${posting.description.slice(0, 30)}...`
             : posting.description}
+        </span>
+
+        <span className="flex flex-wrap gap-1">
+          {posting.categories.map(({ category }) => (
+            <span
+              key={category.id}
+              className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600"
+            >
+              {category.name}
+            </span>
+          ))}
         </span>
 
         <span
@@ -109,6 +110,15 @@ export const View: FC = () => {
         <TableHeader />
         {renderContent()}
       </div>
+      {metadata && (
+        <Pagination
+          totalPages={metadata.totalPages}
+          currentPage={metadata.currentPage}
+          pageSize={metadata.pageSize}
+          totalCount={metadata.totalCount}
+          onPageChange={setCurrentPage}
+        />
+      )}
     </div>
   );
 };
