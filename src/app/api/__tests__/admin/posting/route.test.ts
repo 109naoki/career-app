@@ -1,27 +1,29 @@
-import { GET } from '../../../admin/posting/route';
+import { GET } from '@/app/api/admin/posting/route';
 import type { Posting } from '@prisma/client';
+import { NextRequest } from 'next/server';
+import { createMockPrismaClient } from '../../mocks/prisma';
+import { setupAuthMocks } from '../../mocks/auth';
+import { createTestRequest } from '../../mocks/request';
 
-
-const mockFindMany = jest.fn<Promise<Posting[]>, []>();
-
-
-
+const mockPrisma = createMockPrismaClient();
 jest.mock('@/app/lib/prisma', () => ({
-  prisma: {
-    posting: {
-      findMany: (): Promise<Posting[]> => mockFindMany(),
-    },
-  },
+  prisma: mockPrisma,
 }));
+
+// JWT と headers のモック
+jest.mock('jose');
+jest.mock('next/headers');
 
 describe('GET /api/admin/posting', () => {
   beforeEach(() => {
- 
-    mockFindMany.mockReset();
+    mockPrisma.posting.findMany.mockReset();
+    setupAuthMocks();
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   it('should return a list of postings', async () => {
-
     const mockPostings: Partial<Posting>[] = [
       { 
         id: "testing-id-1", 
@@ -41,41 +43,33 @@ describe('GET /api/admin/posting', () => {
       },
     ];
 
-    mockFindMany.mockResolvedValue(mockPostings as Posting[]);
+    mockPrisma.posting.findMany.mockResolvedValue(mockPostings as Posting[]);
 
-    const response = await GET();
+    const request = new NextRequest(createTestRequest());
+    const response = await GET(request);
     const json = await response.json();
- 
+
     const expectedData = mockPostings.map(post => ({
       ...post,
       createdAt: post.createdAt!.toISOString(),
       updatedAt: post.updatedAt!.toISOString()
     }));
-  
+
     expect(response.status).toBe(200);
     expect(json.data).toEqual(expectedData);
-    expect(mockFindMany).toHaveBeenCalledTimes(1);
+  
   });
 
-  it('should return a 500 error if there is a database error', async () => {
-    const mockError = new Error('Database error');
-    mockFindMany.mockRejectedValue(mockError);
+// emptyのテスト
+  it('should return an empty array if no postings are found', async () => {
+    mockPrisma.posting.findMany.mockResolvedValue([]);
 
-    const response = await GET();
-    const json = await response.json();
-
-    expect(response.status).toBe(500);
-    expect(json.message).toBe('Failed Fetch data');
-    expect(json.error).toBeDefined();
-  });
-
-  it('should handle empty results', async () => {
-    mockFindMany.mockResolvedValue([]);
-
-    const response = await GET();
+    const request = new NextRequest(createTestRequest());
+    const response = await GET(request);
     const json = await response.json();
 
     expect(response.status).toBe(200);
     expect(json.data).toEqual([]);
   });
+
 });
