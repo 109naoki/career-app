@@ -16,7 +16,6 @@ export const View: FC = () => {
     isLoading,
     searchTerm,
     setSearchTerm,
-
     setCurrentPage,
   } = usePostings();
 
@@ -62,21 +61,23 @@ export const View: FC = () => {
           {posting.categories.map(({ category }) => (
             <span
               key={category.id}
-              className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600"
+              className="inline-flex items-center rounded bg-gray-50 px-1.5 py-0.5 text-[10px] leading-none text-gray-500"
             >
               {category.name}
             </span>
           ))}
         </span>
 
-        <span
-          className={`rounded-md px-2 py-1 text-sm font-semibold ${
-            posting.isActive
-              ? "bg-green-200 text-green-800"
-              : "bg-red-200 text-red-800"
-          }`}
-        >
-          {posting.isActive ? "公開" : "下書き"}
+        <span>
+          <span
+            className={`inline-flex rounded-sm px-1 py-0.5 text-[10px] leading-none ${
+              posting.isActive
+                ? "bg-green-50 text-green-600"
+                : "bg-red-50 text-red-600"
+            }`}
+          >
+            {posting.isActive ? "公開" : "下書き"}
+          </span>
         </span>
 
         <span>{formatDate(posting.createdAt)}</span>
