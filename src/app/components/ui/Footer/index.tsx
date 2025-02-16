@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function Footer() {
   return (
     <footer className="border-t bg-background">
@@ -7,28 +9,28 @@ export function Footer() {
             <h3 className="mb-4 text-lg font-semibold">About</h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <a
+                <Link
                   href="/about"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/careers"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   Careers
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/press"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   Press
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -36,28 +38,28 @@ export function Footer() {
             <h3 className="mb-4 text-lg font-semibold">Resources</h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <a
+                <Link
                   href="/blog"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   Blog
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/guides"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   Guides
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/help"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   Help Center
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -65,28 +67,28 @@ export function Footer() {
             <h3 className="mb-4 text-lg font-semibold">Legal</h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <a
+                <Link
                   href="/privacy"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   Privacy
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/terms"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   Terms
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/cookies"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   Cookies
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -94,20 +96,20 @@ export function Footer() {
             <h3 className="mb-4 text-lg font-semibold">Contact</h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <a
+                <Link
                   href="mailto:contact@example.com"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   contact@example.com
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="tel:+1234567890"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   +1 (234) 567-890
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
