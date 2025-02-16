@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "./components/ui/Header";
 import { Footer } from "./components/ui/Footer";
 import { ThemeProvider } from "next-themes";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +26,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isProduction = process.env.NODE_ENV === "production";
+
   return (
-    <html lang="en">
+    <html lang="ja">
+      {isProduction && <GoogleAnalytics gaId={process.env.G4_ID!} />}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
