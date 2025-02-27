@@ -31,6 +31,23 @@ export type Post = {
   publishedAt: string;
   revisedAt: string;
 };
+export type Thumbnail = {
+  url:string
+  height:number
+  width:number
+}
+
+export type Blog = {
+  id: string;
+  title: string;
+  description: string;
+  contents:string
+  created_at: string;
+  updated_at: string;
+  thumbnail: Thumbnail;
+  categories: Category[];
+
+}
 
 
 export type ApiResponse = {
