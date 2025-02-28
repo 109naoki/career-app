@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Search, Filter } from "lucide-react";
+import { Search, Filter, Tag } from "lucide-react";
 
 type Props = {
   categories: { id: string; name: string }[];
@@ -40,19 +40,29 @@ export const SearchForm: FC<Props> = ({
           <span>カテゴリーでフィルター:</span>
         </div>
         <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => onCategoryToggle(category.id)}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
-                selectedCategories.includes(category.id)
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-              }`}
-            >
-              {category.name}
-            </button>
-          ))}
+          {categories.map((category) => {
+            const isSelected = selectedCategories.includes(category.id);
+            return (
+              <button
+                key={category.id}
+                onClick={() => onCategoryToggle(category.id)}
+                className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                  isSelected
+                    ? "bg-primary text-primary-foreground shadow-md"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                }`}
+              >
+                <Tag
+                  className={`h-3.5 w-3.5 ${
+                    isSelected
+                      ? "text-primary-foreground"
+                      : "text-secondary-foreground"
+                  }`}
+                />
+                {category.name}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>

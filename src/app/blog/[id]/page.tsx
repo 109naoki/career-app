@@ -89,15 +89,15 @@ export default async function BlogPage({ params }: Props) {
       </div>
 
       <div className="container mx-auto px-4 py-12">
-        <div className="mx-auto grid max-w-4xl gap-12">
+        <div className="mx-auto grid max-w-4xl items-center gap-12">
           {blog.thumbnail && (
-            <div className="overflow-hidden rounded-xl">
+            <div className="mx-auto overflow-hidden rounded-xl">
               <Image
                 src={blog.thumbnail.url}
                 alt={blog.title}
-                width={200}
-                height={200}
-                className="w-full object-cover"
+                width={300}
+                height={300}
+                className="mx-auto object-cover"
               />
             </div>
           )}
