@@ -8,7 +8,7 @@ type Props = {
   onCategoryToggle: (categoryId: string) => void;
 };
 
-export const SearchForm: FC<Props> = ({
+export const CarrerForm: FC<Props> = ({
   categories,
   selectedCategories,
   onSearchChange,

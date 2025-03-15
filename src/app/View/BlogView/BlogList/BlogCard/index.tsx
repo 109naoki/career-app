@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { ImageIcon, Tag } from "lucide-react";
+import { ImageIcon } from "lucide-react";
 import { Blog } from "@/app/types/carrer";
 
 type Props = {
@@ -104,17 +104,6 @@ export const BlogCard: FC<Props> = ({
         <p className="text-muted-foreground mb-4 line-clamp-2 flex-grow text-sm">
           {post.description.slice(0, 50)}...
         </p>
-        <div className="mt-auto flex flex-wrap gap-2">
-          {post.categories.map((category) => (
-            <span
-              key={category.id}
-              className="bg-secondary text-secondary-foreground flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium"
-            >
-              <Tag className="text-secondary-foreground h-3 w-3" />
-              {category.name}
-            </span>
-          ))}
-        </div>
       </div>
     </Link>
   );
