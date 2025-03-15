@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { BookOpen } from "lucide-react";
-import { Blog } from "../../types/carrer";
 import { BlogCard } from "./BlogCard";
+import { Blog } from "@/app/types/carrer";
 
 type Props = {
   posts: Blog[];

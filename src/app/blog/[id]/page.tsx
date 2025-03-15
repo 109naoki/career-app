@@ -1,6 +1,6 @@
 import { client } from "@/app/lib/microcms";
 import { Blog } from "@/app/types/carrer";
-import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
+import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -71,19 +71,6 @@ export default async function BlogPage({ params }: Props) {
                 更新日： {blog.updated_at.split("T")[0]}
               </time>
             </div>
-
-            <div className="flex flex-wrap gap-2">
-              {blog.categories.map((category) => (
-                <Link
-                  key={category.id}
-                  href={`/blog/category/${category.id}`}
-                  className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-800 transition-colors hover:bg-gray-200"
-                >
-                  <Tag className="mr-1 h-3 w-3" />
-                  {category.name}
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       </div>
@@ -133,19 +120,6 @@ export default async function BlogPage({ params }: Props) {
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 ブログ一覧に戻る
               </Link>
-
-              <div className="flex flex-wrap gap-2">
-                {blog.categories.map((category) => (
-                  <Link
-                    key={category.id}
-                    href={`/blog/category/${category.id}`}
-                    className="inline-flex items-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-200"
-                  >
-                    <Tag className="mr-2 h-4 w-4" />
-                    {category.name}
-                  </Link>
-                ))}
-              </div>
             </div>
           </div>
         </div>

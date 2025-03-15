@@ -18,6 +18,7 @@ type Image = {
 
 export type Post = {
   id: string;
+  affLink: string;
   title: string;
   description: string;
   eyecatch: Image;
@@ -26,6 +27,7 @@ export type Post = {
   updated_at: string;
   published: boolean;
   categories: Category[];
+  contents: string;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
@@ -45,14 +47,6 @@ export type Blog = {
   created_at: string;
   updated_at: string;
   thumbnail: Thumbnail;
-  categories: Category[];
-
 }
 
 
-export type ApiResponse = {
-  contents: Post[];
-  totalCount: number;
-  offset: number;
-  limit: number;
-};
