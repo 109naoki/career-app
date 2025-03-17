@@ -11,6 +11,7 @@ async function getBlogData() {
 
   const categories = await client.get({
     endpoint: "category",
+    queries: { limit: 100 },
   });
   const blogs = await client.get({
     endpoint: "blog",
