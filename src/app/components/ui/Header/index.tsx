@@ -16,7 +16,7 @@ export function Header() {
         <div className="flex items-center gap-6 md:gap-10">
           <Link href="/" className="flex items-center space-x-2">
             <Briefcase className="h-6 w-6" />
-            <span className="inline-block font-bold">Carrer App</span>
+            <span className="inline-block font-bold">Career Hub</span>
           </Link>
           {/* デスクトップ用ナビゲーション */}
           <nav className="hidden gap-6 md:flex">
@@ -62,21 +62,21 @@ export function Header() {
             <nav className="flex flex-col space-y-4">
               <Link
                 href="/carrer"
-                className="text-muted-foreground text-md flex items-center py-2 font-medium transition-colors hover:text-foreground"
+                className="text-muted-foreground text-md flex items-center justify-center py-2 text-center font-medium transition-colors hover:text-foreground"
                 onClick={toggleMenu}
               >
                 サービス
               </Link>
               <Link
                 href="/blog"
-                className="text-muted-foreground text-md flex items-center py-2 font-medium transition-colors hover:text-foreground"
+                className="text-muted-foreground text-md flex items-center justify-center py-2 text-center font-medium transition-colors hover:text-foreground"
                 onClick={toggleMenu}
               >
                 ブログ
               </Link>
               <Link
                 href="https://docs.google.com/forms/d/1x1rq3uiTPskF3qWEo63LgpO2ahAv9ah2hkzvYB_J8IA"
-                className="text-muted-foreground text-md flex items-center py-2 font-medium transition-colors hover:text-foreground"
+                className="text-muted-foreground text-md flex items-center justify-center py-2 text-center font-medium transition-colors hover:text-foreground"
                 onClick={toggleMenu}
               >
                 お問い合わせ
