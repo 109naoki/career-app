@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props) {
   const carrer = await getCarrer(id);
 
   return {
-    title: carrer.title,
+    title: carrer.title + " | Career Hub",
     description: carrer.description,
     openGraph: {
       title: carrer.title,

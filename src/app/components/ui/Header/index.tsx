@@ -20,18 +20,18 @@ export function Header() {
           </Link>
           {/* デスクトップ用ナビゲーション */}
           <nav className="hidden gap-6 md:flex">
-            {/* <Link
-              href="/about"
+            <Link
+              href="/carrer"
               className="text-muted-foreground text-md flex items-center font-medium transition-colors hover:text-foreground"
             >
-              About
-            </Link> */}
-            {/* <Link
+              サービス
+            </Link>
+            <Link
               href="/blog"
               className="text-muted-foreground text-md flex items-center font-medium transition-colors hover:text-foreground"
             >
-              ブログ一覧
-            </Link> */}
+              ブログ
+            </Link>
             <Link
               href="https://docs.google.com/forms/d/1x1rq3uiTPskF3qWEo63LgpO2ahAv9ah2hkzvYB_J8IA"
               className="text-muted-foreground text-md flex items-center font-medium transition-colors hover:text-foreground"
@@ -60,20 +60,20 @@ export function Header() {
         <div className="md:hidden">
           <div className="container border-t bg-background py-4">
             <nav className="flex flex-col space-y-4">
-              {/* <Link
-                href="/about"
+              <Link
+                href="/carrer"
                 className="text-muted-foreground text-md flex items-center py-2 font-medium transition-colors hover:text-foreground"
                 onClick={toggleMenu}
               >
-                About
-              </Link> */}
-              {/* <Link
+                サービス
+              </Link>
+              <Link
                 href="/blog"
                 className="text-muted-foreground text-md flex items-center py-2 font-medium transition-colors hover:text-foreground"
                 onClick={toggleMenu}
               >
-                ブログ一覧
-              </Link> */}
+                ブログ
+              </Link>
               <Link
                 href="https://docs.google.com/forms/d/1x1rq3uiTPskF3qWEo63LgpO2ahAv9ah2hkzvYB_J8IA"
                 className="text-muted-foreground text-md flex items-center py-2 font-medium transition-colors hover:text-foreground"

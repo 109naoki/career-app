@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props) {
   const blog = await getBlog(id);
 
   return {
-    title: blog.title,
+    title: blog.title + " | Career Hub",
     description: blog.description,
     openGraph: {
       title: blog.title,
