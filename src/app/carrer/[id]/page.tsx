@@ -22,6 +22,38 @@ async function getCarrer(id: string): Promise<Post> {
   }
 }
 
+async function getRelatedPosts(currentPost: Post, limit = 3): Promise<Post[]> {
+  try {
+    // 現在の記事と同じカテゴリを持つ記事を取得
+    if (!currentPost.categories || currentPost.categories.length === 0) {
+      return [];
+    }
+
+    // カテゴリIDをすべて取得して「OR」条件で絞り込むためのフィルター文字列を作成
+    const categoryFilters = currentPost.categories
+      .map((cat) => `categories[contains]${cat.id}`)
+      .join("[or]");
+    const data = await client.get({
+      endpoint: "carrer",
+      queries: {
+        filters: categoryFilters,
+        limit: limit + 1, // 現在の記事も含まれる可能性があるため+1
+      },
+    });
+
+    // 現在の記事を除外
+    const relatedPosts = data.contents.filter(
+      (post: Post) => post.id !== currentPost.id
+    );
+
+    // 最大3件まで返す
+    return relatedPosts.slice(0, limit);
+  } catch (error) {
+    console.error("関連記事取得エラー:", error);
+    return [];
+  }
+}
+
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
   const carrer = await getCarrer(id);
@@ -40,6 +72,7 @@ export async function generateMetadata({ params }: Props) {
 export default async function Page({ params }: Props) {
   const { id } = await params;
   const blog = await getCarrer(id);
+  const relatedPosts = await getRelatedPosts(blog);
 
   return (
     <main className="min-h-screen bg-white">
@@ -150,6 +183,43 @@ export default async function Page({ params }: Props) {
               公式サイト
             </Link>
           </div>
+          {/* 同じジャンルの記事 */}
+          {relatedPosts.length > 0 && (
+            <div className="w-full">
+              <h2 className="mb-6 text-xl font-bold text-gray-900">
+                同じジャンルのサービス
+              </h2>
+              <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+                {relatedPosts.map((post) => (
+                  <Link
+                    key={post.id}
+                    href={`/carrer/${post.id}`}
+                    className="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md"
+                  >
+                    {post.eyecatch && (
+                      <div className="aspect-video overflow-hidden">
+                        <Image
+                          src={post.eyecatch.url}
+                          alt={post.title}
+                          width={300}
+                          height={170}
+                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                    )}
+                    <div className="p-4">
+                      <h3 className="mb-2 line-clamp-1 text-base font-bold text-gray-900">
+                        {post.title}
+                      </h3>
+                      <p className="line-clamp-2 text-sm text-gray-600">
+                        {post.description}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* 記事のフッター */}
           <div className="border-t border-gray-200 pt-8">
@@ -166,7 +236,7 @@ export default async function Page({ params }: Props) {
                 {blog.categories.map((category) => (
                   <Link
                     key={category.id}
-                    href={`/blog/category/${category.id}`}
+                    href={`/category/${category.id}`}
                     className="inline-flex items-center rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-200"
                   >
                     <Tag className="mr-2 h-4 w-4" />

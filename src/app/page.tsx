@@ -33,7 +33,7 @@ async function getBlogData() {
   };
 }
 
-export default async function Home() {
+export default async function Page() {
   const { posts, blogs, categories } = await getBlogData();
 
   return (

@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default async function BlogPage({ params }: Props) {
+export default async function Page({ params }: Props) {
   const { id } = await params;
   const blog = await getBlog(id);
 

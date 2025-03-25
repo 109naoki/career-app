@@ -44,6 +44,14 @@ export const BREADCRUMB_MAPPING: Record<string, BreadcrumbItem[]> = {
       isCurrent: true
     }
   ],
+  "/category/[id]": [
+
+    {
+      label: "カテゴリ別",
+      href: "/category/[id]",
+      isCurrent: true
+    }
+  ],
 
 };
 
