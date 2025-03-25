@@ -2,6 +2,14 @@ import { Suspense } from "react";
 import { client } from "./lib/microcms";
 import { View } from "./View";
 import LoadingSpinner from "./components/atoms/LoadingSpinner";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "あなたの強みを活かせる転職先が見つかる｜無料で使える転職アプリ｜Career Hub",
+  description:
+    "転職や副業を考えているあなたに、最適な求人とキャリアの選択肢をご提案。無料で使える転職支援アプリ Career Hub で一歩を踏み出そう。",
+};
 
 async function getBlogData() {
   const posts = await client.get({
