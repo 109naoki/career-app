@@ -24,6 +24,10 @@ export default function RootLayout({
 
   return (
     <html lang="ja">
+      <meta
+        name="google-site-verification"
+        content="wMJ6XKHz5VF1Rxirwww9tLbybfLwhREuvsTxR6X46wc"
+      />
       {isProduction && <GoogleAnalytics gaId={process.env.G4_ID!} />}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
