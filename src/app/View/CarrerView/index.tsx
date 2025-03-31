@@ -1,5 +1,5 @@
 import { Post } from "@/app/types/carrer";
-import { useState, useMemo, FC } from "react";
+import { useState, useMemo, FC, useRef, useEffect } from "react";
 import { CarrerForm } from "./CarrerForm";
 import { CarrerList } from "./CarrerList";
 import { Pagination } from "../Pagination";
@@ -13,6 +13,7 @@ export const CarrerView: FC<Props> = ({ posts, categories }) => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 20;
+  const listRef = useRef<HTMLDivElement>(null);
 
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
@@ -51,6 +52,12 @@ export const CarrerView: FC<Props> = ({ posts, categories }) => {
     setCurrentPage(1);
   };
 
+  useEffect(() => {
+    if (selectedCategories.length > 0 && listRef.current) {
+      listRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [selectedCategories]);
+
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <CarrerForm
@@ -60,7 +67,9 @@ export const CarrerView: FC<Props> = ({ posts, categories }) => {
         onCategoryToggle={toggleCategory}
       />
 
-      <CarrerList posts={currentPosts} totalPosts={filteredPosts.length} />
+      <div ref={listRef}>
+        <CarrerList posts={currentPosts} totalPosts={filteredPosts.length} />
+      </div>
 
       {totalPages > 1 && (
         <Pagination

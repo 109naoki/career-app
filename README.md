@@ -1,36 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+概要
+Career Hub（キャリアハブ）は、転職や副業を探している方々に向けた統合型キャリア情報プラットフォームです。様々な業界・職種の求人情報を提供し、あなたの興味や経験に合った最適なキャリアの選択肢を見つけることができます。
+公式サイト: https://carrer.service-hub.jp/
+主な機能
+求人情報の検索・閲覧: 多様な業界・職種の求人情報をカテゴリー別に検索できます
+カテゴリーフィルター: ボランティア、治験、未経験可、在宅ワークなど多彩なカテゴリーでフィルタリング
+ブログ記事: キャリア構築に役立つ情報や各サービスの詳細解説記事を提供
+レスポンシブデザイン: スマートフォン、タブレット、PC など様々なデバイスに対応
+技術スタック
+フレームワーク: Next.js 15.1.4
+言語: TypeScript
+スタイリング: TailwindCSS
+CMS: microCMS
+デプロイ: Vercel
