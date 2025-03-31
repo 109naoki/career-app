@@ -9,6 +9,30 @@ export const metadata: Metadata = {
     "あなたの強みを活かせる転職先が見つかる｜無料で使える転職アプリ｜Career Hub",
   description:
     "転職や副業を考えているあなたに、最適な求人とキャリアの選択肢をご提案。無料で使える転職支援アプリ Career Hub で一歩を踏み出そう。",
+  openGraph: {
+    title: "あなたの強みを活かせる転職先が見つかる | Career Hub",
+    description:
+      "転職や副業を考えているあなたに、最適な求人とキャリアの選択肢をご提案。",
+    url: "https://carrer.service-hub.jp/",
+    siteName: "Career Hub",
+    images: [
+      {
+        url: "https://carrer.service-hub.jp/carrer-hub.png", // OGP画像のURLを指定
+        width: 1200,
+        height: 630,
+        alt: "Career Hub - あなたの強みを活かせる転職先が見つかる",
+      },
+    ],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "あなたの強みを活かせる転職先が見つかる | Career Hub",
+    description:
+      "転職や副業を考えているあなたに、最適な求人とキャリアの選択肢をご提案。",
+    images: ["https://carrer.service-hub.jp/carrer-hub.png"], // Twitter Card用の画像
+  },
 };
 
 async function getBlogData() {
