@@ -43,7 +43,7 @@ export function Header() {
 
         {/* ハンバーガーメニューボタン */}
         <button
-          className="text-foreground md:hidden"
+          className="mr-4 text-foreground md:hidden"
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
@@ -62,21 +62,21 @@ export function Header() {
             <nav className="flex flex-col space-y-4">
               <Link
                 href="/carrer"
-                className="text-muted-foreground text-md flex items-center justify-center py-2 text-center font-medium transition-colors hover:text-foreground"
+                className="text-md hover:bg-secondary flex items-center justify-center rounded-md py-2 text-center font-medium text-foreground transition-colors"
                 onClick={toggleMenu}
               >
                 サービス
               </Link>
               <Link
                 href="/blog"
-                className="text-muted-foreground text-md flex items-center justify-center py-2 text-center font-medium transition-colors hover:text-foreground"
+                className="text-md hover:bg-secondary flex items-center justify-center rounded-md py-2 text-center font-medium text-foreground transition-colors"
                 onClick={toggleMenu}
               >
                 ブログ
               </Link>
               <Link
                 href="https://docs.google.com/forms/d/1x1rq3uiTPskF3qWEo63LgpO2ahAv9ah2hkzvYB_J8IA"
-                className="text-muted-foreground text-md flex items-center justify-center py-2 text-center font-medium transition-colors hover:text-foreground"
+                className="text-md hover:bg-secondary flex items-center justify-center rounded-md py-2 text-center font-medium text-foreground transition-colors"
                 onClick={toggleMenu}
               >
                 お問い合わせ

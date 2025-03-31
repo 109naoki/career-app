@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { Search, Filter, Tag } from "lucide-react";
 
 type Props = {
@@ -14,10 +14,16 @@ export const CarrerForm: FC<Props> = ({
   onSearchChange,
   onCategoryToggle,
 }) => {
+  const listRef = useRef<HTMLDivElement>(null);
+
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
     const timerId = setTimeout(() => {
-      onSearchChange(e.target.value);
-    }, 500);
+      onSearchChange(value);
+      if (value.trim() !== "" && listRef.current) {
+        listRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 1000);
 
     return () => clearTimeout(timerId);
   };
@@ -34,7 +40,7 @@ export const CarrerForm: FC<Props> = ({
         />
       </div>
 
-      <div className="mt-4">
+      <div className="mt-4" ref={listRef}>
         <div className="text-muted-foreground mb-2 flex items-center gap-2 text-sm">
           <Filter className="h-4 w-4" />
           <span>カテゴリーでフィルター:</span>
@@ -48,15 +54,13 @@ export const CarrerForm: FC<Props> = ({
                 onClick={() => onCategoryToggle(category.id)}
                 className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all ${
                   isSelected
-                    ? "bg-primary text-primary-foreground shadow-md"
-                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                    ? "bg-blue-600 text-white shadow-md"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
                 <Tag
                   className={`h-3.5 w-3.5 ${
-                    isSelected
-                      ? "text-primary-foreground"
-                      : "text-secondary-foreground"
+                    isSelected ? "text-white" : "text-gray-700"
                   }`}
                 />
                 {category.name}

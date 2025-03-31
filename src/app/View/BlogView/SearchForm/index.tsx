@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { Search } from "lucide-react";
 
 type Props = {
@@ -6,10 +6,16 @@ type Props = {
 };
 
 export const SearchForm: FC<Props> = ({ onSearchChange }) => {
+  const listRef = useRef<HTMLDivElement>(null);
+
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
     const timerId = setTimeout(() => {
-      onSearchChange(e.target.value);
-    }, 500);
+      onSearchChange(value);
+      if (value.trim() !== "" && listRef.current) {
+        listRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 1000);
 
     return () => clearTimeout(timerId);
   };
@@ -25,6 +31,7 @@ export const SearchForm: FC<Props> = ({ onSearchChange }) => {
           className="border-input placeholder:text-muted-foreground focus:border-primary focus:ring-primary w-full rounded-lg border bg-background px-10 py-3 text-foreground shadow-sm transition-colors focus:outline-none focus:ring-1"
         />
       </div>
+      <div ref={listRef}></div>
     </div>
   );
 };
