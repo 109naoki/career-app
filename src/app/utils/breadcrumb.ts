@@ -52,7 +52,13 @@ export const BREADCRUMB_MAPPING: Record<string, BreadcrumbItem[]> = {
       isCurrent: true
     }
   ],
-
+  "/privacy_policy": [
+    {
+      label: "プライバシーポリシー",
+      href: "/privacy_policy",
+      isCurrent: true
+    }
+  ]
 };
 
 /**
