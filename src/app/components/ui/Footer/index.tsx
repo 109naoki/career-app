@@ -17,6 +17,12 @@ export function Footer() {
           >
             お問い合わせ
           </Link>
+          <Link
+            href="/privacy_policy"
+            className="text-muted-foreground text-center hover:text-foreground md:text-left"
+          >
+            プライバシーポリシー
+          </Link>
         </div>
         <div className="border-t pt-6">
           <p className="text-muted-foreground text-center text-sm">

@@ -33,6 +33,12 @@ export function Header() {
               ブログ
             </Link>
             <Link
+              href="/privacy_policy"
+              className="text-muted-foreground text-md flex items-center font-medium transition-colors hover:text-foreground"
+            >
+              プライバシーポリシー
+            </Link>
+            <Link
               href="https://docs.google.com/forms/d/1x1rq3uiTPskF3qWEo63LgpO2ahAv9ah2hkzvYB_J8IA"
               className="text-muted-foreground text-md flex items-center font-medium transition-colors hover:text-foreground"
             >
@@ -73,6 +79,13 @@ export function Header() {
                 onClick={toggleMenu}
               >
                 ブログ
+              </Link>
+              <Link
+                href="/privacy_policy"
+                className="text-md hover:bg-secondary flex items-center justify-center rounded-md py-2 text-center font-medium text-foreground transition-colors"
+                onClick={toggleMenu}
+              >
+                プライバシーポリシー
               </Link>
               <Link
                 href="https://docs.google.com/forms/d/1x1rq3uiTPskF3qWEo63LgpO2ahAv9ah2hkzvYB_J8IA"
