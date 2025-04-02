@@ -1,5 +1,5 @@
-import { FC, useRef } from "react";
-import { Search, Filter, Tag } from "lucide-react";
+import { FC, useRef, useState, useEffect } from "react";
+import { Search, Filter, Tag, ChevronDown, ChevronUp } from "lucide-react";
 
 type Props = {
   categories: { id: string; name: string }[];
@@ -15,6 +15,18 @@ export const CarrerForm: FC<Props> = ({
   onCategoryToggle,
 }) => {
   const listRef = useRef<HTMLDivElement>(null);
+  const [showAllCategories, setShowAllCategories] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIfMobile();
+    window.addEventListener("resize", checkIfMobile);
+    return () => window.removeEventListener("resize", checkIfMobile);
+  }, []);
 
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -27,6 +39,35 @@ export const CarrerForm: FC<Props> = ({
 
     return () => clearTimeout(timerId);
   };
+
+  const priorityCategories = [
+    "転職",
+    "副業",
+    "エンジニア",
+    "フリーランス",
+    "未経験",
+  ];
+
+  // 優先カテゴリーとその他のカテゴリーに分ける
+  const priorityCategoryItems = categories
+    .filter((category) => priorityCategories.includes(category.name))
+    .sort(
+      (a, b) =>
+        priorityCategories.indexOf(a.name) - priorityCategories.indexOf(b.name)
+    );
+
+  const otherCategoryItems = categories
+    .filter((category) => !priorityCategories.includes(category.name))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  // 表示するカテゴリー
+  const visibleCategories = isMobile
+    ? showAllCategories
+      ? [...priorityCategoryItems, ...otherCategoryItems]
+      : priorityCategoryItems
+    : [...priorityCategoryItems, ...otherCategoryItems];
+
+  const hasMoreCategories = otherCategoryItems.length > 0;
 
   return (
     <div className="bg-card mb-8 rounded-xl p-6 shadow-lg">
@@ -46,7 +87,7 @@ export const CarrerForm: FC<Props> = ({
           <span>カテゴリーでフィルター:</span>
         </div>
         <div className="flex flex-wrap gap-2">
-          {categories.map((category) => {
+          {visibleCategories.map((category) => {
             const isSelected = selectedCategories.includes(category.id);
             return (
               <button
@@ -67,6 +108,25 @@ export const CarrerForm: FC<Props> = ({
               </button>
             );
           })}
+
+          {isMobile && hasMoreCategories && (
+            <button
+              onClick={() => setShowAllCategories(!showAllCategories)}
+              className="flex items-center gap-1.5 rounded-full bg-amber-100 px-4 py-2 text-sm font-medium text-amber-700 transition-all hover:bg-amber-200"
+            >
+              {showAllCategories ? (
+                <>
+                  <ChevronUp className="h-3.5 w-3.5" />
+                  閉じる
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="h-3.5 w-3.5" />
+                  その他のカテゴリー（{otherCategoryItems.length}件）
+                </>
+              )}
+            </button>
+          )}
         </div>
       </div>
     </div>
